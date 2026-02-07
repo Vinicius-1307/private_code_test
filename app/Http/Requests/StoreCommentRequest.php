@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreCommentRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     */
+    public function rules(): array
+    {
+        return [
+            'body' => ['required', 'string', 'min:3', 'max:1000'],
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     */
+    public function messages(): array
+    {
+        return [
+            'body.required' => 'O comentário não pode estar vazio.',
+            'body.min' => 'O comentário deve ter no mínimo 3 caracteres.',
+            'body.max' => 'O comentário deve ter no máximo 1000 caracteres.',
+        ];
+    }
+}
