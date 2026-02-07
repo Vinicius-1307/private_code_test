@@ -9,25 +9,22 @@ Route::get('/', function () {
     return redirect()->route('recipes.index');
 });
 
-// Rotas públicas de receitas
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
-Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 
-// Rotas autenticadas de receitas
 Route::middleware('auth')->group(function () {
     Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
     Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
     Route::get('/recipes/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
     Route::put('/recipes/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
     Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
-    
-    // Comentários
+
     Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])
         ->name('recipes.comments.store');
-    
-    // Avaliações
+
     Route::post('/recipes/{recipe}/ratings', [RatingController::class, 'store'])
         ->name('recipes.ratings.store');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
+
+require __DIR__ . '/auth.php';
