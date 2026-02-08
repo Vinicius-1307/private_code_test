@@ -1,60 +1,298 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Receitas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Um sistema de gerenciamento de receitas culinárias desenvolvido para avaliação da empresa Private Code.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Índice
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias](#tecnologias)
+- [Arquitetura](#arquitetura)
+- [Pré-requisitos](#pré-requisitos)
+- [Instalação](#instalação)
+- [Executando o Projeto](#executando-o-projeto)
+- [Usuário de Teste](#usuário-de-teste)
+- [Banco de Dados](#banco-de-dados)
+- [Notas de Desenvolvimento](#notas-de-desenvolvimento)
+- [Dúvidas](#dúvidas)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Sobre o Projeto
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Sistema web para compartilhamento e avaliação de receitas culinárias, onde usuários podem:
+- Criar e compartilhar suas próprias receitas
+- Avaliar receitas de outros usuários
+- Comentar em receitas
+- Visualizar receitas com sistema de avaliação por estrelas
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Objetivo:** Demonstrar implementação de CRUD completo com Laravel seguindo princípios SOLID, Repository Pattern e Service Layer.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Funcionalidades
 
-### Premium Partners
+### Autenticação
+- [x] Registro de novos usuários
+- [x] Login/Logout
+- [x] Validação de formulários em português
+- [x] Proteção CSRF em todas as requisições
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Receitas (CRUD Completo)
+- [x] Listagem paginada de receitas
+- [x] Visualização detalhada de receitas
+- [x] Criação de novas receitas (autenticado)
+- [x] Edição de receitas próprias
+- [x] Exclusão de receitas próprias
+- [x] Ingredientes dinâmicos (array)
+- [x] Modo de preparo em texto longo
 
-## Contributing
+### Sistema de Avaliações
+- [x] Avaliar receitas com 1-5 estrelas
+- [x] Média de avaliações exibida
+- [x] Usuário pode avaliar apenas uma vez por receita
+- [x] Não pode avaliar própria receita
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Sistema de Comentários
+- [x] Comentar em receitas
+- [x] Exibir autor e data do comentário
+- [x] Apenas usuários autenticados podem comentar
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Tecnologias
 
-## Security Vulnerabilities
+### Backend
+- **Laravel 12** - Framework PHP
+- **PHP 8.2+** - Linguagem de programação
+- **MySQL/SQLite** - Banco de dados
+- **Eloquent ORM** - Mapeamento objeto-relacional
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Frontend
+- **Blade Templates** - Motor de templates do Laravel
+- **Bootstrap 5.3** - Framework CSS
+- **Bootstrap Icons 1.10** - Biblioteca de ícones
+- **CSS3** - Estilos customizados
+- **MySQL** - Banco de dados
+### Arquitetura
+- **Repository Pattern** - Abstração de acesso a dados
+- **Service Layer** - Lógica de negócio isolada
+- **Policies** - Autorização granular
+- **Form Requests** - Validação encapsulada
+- **Seeders/Factories** - Dados de teste
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# private_code_test
+## Arquitetura
+
+```
+┌─────────────────────────────────────────────────────┐
+│                    CONTROLLER                        │
+│              (RecipeController.php)                  │
+│         Recebe requests, retorna responses           │
+└──────────────────┬──────────────────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────────────────┐
+│                    SERVICE                           │
+│               (RecipeService.php)                    │
+│           Lógica de negócio isolada                  │
+└──────────────────┬──────────────────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────────────────┐
+│                   REPOSITORY                         │
+│             (RecipeRepository.php)                   │
+│          Abstração de acesso ao banco                │
+└──────────────────┬──────────────────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────────────────┐
+│                     MODEL                            │
+│                  (Recipe.php)                        │
+│              Representação da entidade               │
+└─────────────────────────────────────────────────────┘
+```
+
+---
+
+## Pré-requisitos
+
+Certifique-se de ter instalado:
+
+- **PHP 8.2 ou superior**
+  ```bash
+  php -v
+  ```
+
+- **Composer** (gerenciador de dependências PHP)
+  ```bash
+  composer --version
+  ```
+
+- **MySQL**
+  ```bash
+  mysql --version
+  ```
+
+- **Git** (opcional, para clonar o repositório)
+  ```bash
+  git --version
+  ```
+
+---
+
+## Instalação
+
+### 1. Clone o Repositório
+```bash
+git clone <url-do-repositorio>
+cd private_code
+```
+
+### 2. Instale as Dependências PHP
+```bash
+composer install
+```
+
+### 3. Configure o Arquivo de Ambiente
+```bash
+# Copie o arquivo de exemplo
+cp .env.example .env
+
+# Gere a chave da aplicação
+php artisan key:generate
+```
+
+### 4. Configure o Banco de Dados
+
+Crie o banco de dados MySQL:
+```bash
+mysql -u root -p
+CREATE DATABASE sistema_receitas;
+EXIT;
+```
+
+Edite o arquivo `.env`:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sistema_receitas
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
+
+### 5. Execute as Migrations e Seeders
+```bash
+# Recria todas as tabelas e popula com dados de teste
+php artisan migrate:fresh --seed
+```
+
+Isso irá criar:
+- 5 usuários (incluindo usuário de teste)
+- 6 receitas variadas (bolo, lasanha, brigadeiro, etc.)
+- Tabelas de comentários e avaliações
+
+---
+
+## Executando o Projeto
+
+### Inicie o Servidor de Desenvolvimento
+
+```bash
+php artisan serve
+```
+
+Acesse: **http://localhost:8000**
+
+### Porta Customizada (Opcional)
+
+```bash
+php artisan serve --port=8080
+```
+
+Acesse: **http://localhost:8080**
+
+---
+
+## Usuário de Teste
+
+Após executar as seeders (`migrate:fresh --seed`), use essas credenciais para login:
+
+```
+Email: privatecode@email.com
+Senha: password
+```
+
+**Outros usuários também disponíveis:**
+- Todos com senha `password`
+- Nomes e emails gerados aleatoriamente pelo Faker
+
+---
+
+## Banco de Dados
+
+### Schema de Receitas
+```sql
+recipes
+├── id (PK)
+├── user_id (FK → users)
+├── title (string)
+├── description (text, nullable)
+├── ingredients (json)
+├── steps (text)
+├── created_at
+└── updated_at
+```
+
+### Schema de Avaliações
+```sql
+ratings
+├── id (PK)
+├── recipe_id (FK → recipes)
+├── user_id (FK → users)
+├── score (integer 1-5)
+├── created_at
+└── updated_at
+
+UNIQUE(recipe_id, user_id) # Um usuário avalia uma vez
+```
+
+### Schema de Comentários
+```sql
+comments
+├── id (PK)
+├── recipe_id (FK → recipes)
+├── user_id (FK → users)
+├── body (text)
+├── created_at
+└── updated_at
+```
+
+---
+
+## Notas de Desenvolvimento
+
+### Padrões Utilizados
+- **Repository Pattern** - Abstração de dados
+- **Service Layer** - Lógica de negócio
+- **Dependency Injection** - Via constructor
+- **Policy-Based Authorization** - Gates e Policies
+- **Form Request Validation** - Validação encapsulada
+
+### Princípios SOLID
+- **S**ingle Responsibility - Cada classe tem uma responsabilidade
+- **O**pen/Closed - Aberto para extensão, fechado para modificação
+- **L**iskov Substitution - Interfaces garantem substituibilidade
+- **I**nterface Segregation - Interfaces específicas
+- **D**ependency Inversion - Dependências via abstração
+
+---
+
+## Dúvidas
+**Email:** viniciusjose9@outlook.com
+
+**LinkedIn:** [Vinicius José](https://www.linkedin.com/in/vinicius-josé-dev/)
