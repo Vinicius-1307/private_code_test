@@ -14,7 +14,7 @@ class CommentController extends Controller
     ) {}
 
     /**
-     * Store a new comment on a recipe.
+     * Cria um novo comentário para uma receita específica.
      * 
      * @param StoreCommentRequest $request
      * @param Recipe $recipe

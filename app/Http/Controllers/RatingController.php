@@ -14,7 +14,7 @@ class RatingController extends Controller
     ) {}
 
     /**
-     * Store or update a rating for a recipe.
+     * Cria ou atualiza uma avaliação para uma receita específica.
      * 
      * @param StoreRatingRequest $request
      * @param Recipe $recipe

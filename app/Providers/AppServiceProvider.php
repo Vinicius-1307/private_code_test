@@ -31,7 +31,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Registrar Policy
         Gate::policy(Recipe::class, RecipePolicy::class);
     }
 }
