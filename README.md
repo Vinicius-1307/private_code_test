@@ -148,7 +148,7 @@ Certifique-se de ter instalado:
 
 ### 1. Clone o Repositório
 ```bash
-git clone <url-do-repositorio>
+git clone <https://github.com/Vinicius-1307/private_code_test.git>
 cd private_code
 ```
 
