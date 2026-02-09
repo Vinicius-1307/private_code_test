@@ -8,7 +8,8 @@ use App\Repositories\Interfaces\RatingRepositoryInterface;
 class RatingService
 {
     public function __construct(
-        protected RatingRepositoryInterface $ratingRepository
+        protected RatingRepositoryInterface $ratingRepository,
+        protected RecipeService $recipeService
     ) {}
 
     /**
@@ -19,9 +20,14 @@ class RatingService
      * @param int $userId
      * @param int $score
      * @return Rating
+     * @throws \InvalidArgumentException
      */
     public function rateRecipe(int $recipeId, int $userId, int $score): Rating
     {
+        if (!$this->recipeService->recipeExists($recipeId)) {
+            throw new \InvalidArgumentException("Receita com ID {$recipeId} não encontrada.");
+        }
+
         $data = [
             'recipe_id' => $recipeId,
             'user_id' => $userId,

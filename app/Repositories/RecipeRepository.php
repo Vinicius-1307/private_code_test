@@ -98,4 +98,15 @@ class RecipeRepository implements RecipeRepositoryInterface
             ->orderBy('created_at', 'desc')
             ->get();
     }
+
+    /**
+     * Verifica se uma receita existe
+     * 
+     * @param int $id
+     * @return bool
+     */
+    public function exists(int $id): bool
+    {
+        return $this->model->where('id', $id)->exists();
+    }
 }

@@ -56,4 +56,12 @@ interface RecipeRepositoryInterface
      * @return Collection
      */
     public function getByUser(int $userId): Collection;
+
+    /**
+     * Verifica se uma receita existe
+     * 
+     * @param int $id
+     * @return bool
+     */
+    public function exists(int $id): bool;
 }

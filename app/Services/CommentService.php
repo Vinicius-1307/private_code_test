@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Collection;
 class CommentService
 {
     public function __construct(
-        protected CommentRepositoryInterface $commentRepository
+        protected CommentRepositoryInterface $commentRepository,
+        protected RecipeService $recipeService
     ) {}
 
     /**
@@ -19,9 +20,14 @@ class CommentService
      * @param int $userId
      * @param string $body
      * @return Comment
+     * @throws \InvalidArgumentException
      */
     public function createComment(int $recipeId, int $userId, string $body): Comment
     {
+        if (!$this->recipeService->recipeExists($recipeId)) {
+            throw new \InvalidArgumentException("Receita com ID {$recipeId} não encontrada.");
+        }
+
         $data = [
             'recipe_id' => $recipeId,
             'user_id' => $userId,

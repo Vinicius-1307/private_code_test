@@ -82,4 +82,15 @@ class RecipeService
     {
         return $this->recipeRepository->getByUser($userId);
     }
+
+    /**
+     * Verifica se uma receita existe
+     * 
+     * @param int $id
+     * @return bool
+     */
+    public function recipeExists(int $id): bool
+    {
+        return $this->recipeRepository->exists($id);
+    }
 }
