@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Comment;
 use App\Models\Recipe;
+use App\Policies\CommentPolicy;
 use App\Policies\RecipePolicy;
 use App\Repositories\CommentRepository;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
@@ -32,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Recipe::class, RecipePolicy::class);
+        Gate::policy(Comment::class, CommentPolicy::class);
     }
 }

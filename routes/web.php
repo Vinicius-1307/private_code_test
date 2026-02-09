@@ -20,6 +20,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])
         ->name('recipes.comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
+        ->name('comments.destroy');
 
     Route::post('/recipes/{recipe}/ratings', [RatingController::class, 'store'])
         ->name('recipes.ratings.store');

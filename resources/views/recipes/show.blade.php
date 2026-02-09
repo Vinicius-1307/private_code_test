@@ -23,15 +23,16 @@
                         <a href="{{ route('recipes.edit', $recipe) }}" class="btn btn-outline-primary btn-sm">
                             <i class="bi bi-pencil-square"></i> Editar
                         </a>
-                        <form method="POST" action="{{ route('recipes.destroy', $recipe) }}"
-                            onsubmit="return confirm('⚠️ Tem certeza que deseja deletar esta receita? Esta ação não pode ser desfeita.')"
-                            class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-outline-danger btn-sm">
-                                <i class="bi bi-trash3"></i> Deletar
-                            </button>
-                        </form>
+                        <x-confirm-delete 
+                            action="{{ route('recipes.destroy', $recipe) }}"
+                            title="Deletar receita?"
+                            text="Tem certeza que deseja deletar '{{ $recipe->title }}'? Esta ação não pode ser desfeita."
+                            confirmText="Sim, deletar!"
+                            cancelText="Cancelar"
+                            class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-trash3"></i>
+                            <span>Deletar</span>
+                        </x-confirm-delete>
                     </div>
                 @endcan
             </div>
@@ -89,13 +90,15 @@
                         <h5 class="card-title"><i class="bi bi-star"></i> Avaliar esta receita</h5>
 
                         @if ($userRating)
-                            <div class="alert alert-success d-flex align-items-center">
-                                <div>
-                                    <i class="bi bi-check-circle-fill me-2"></i>
-                                    <strong>Você já avaliou esta receita!</strong>
+                            <div class="bg-success bg-opacity-10 border border-success rounded-3 p-3 d-flex align-items-start">
+                                <div class="text-success me-2" style="font-size: 1.5rem;">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="grow">
+                                    <strong class="text-success">Você já avaliou esta receita!</strong>
                                     <div class="mt-2">
-                                        Sua avaliação:
-                                        <span class="badge badge-rating">
+                                        <span class="text-muted">Sua avaliação:</span>
+                                        <span class="badge badge-rating ms-1">
                                             <i class="bi bi-star-fill"></i> {{ $userRating->score }}
                                         </span>
                                         <small class="text-muted ms-2">
@@ -153,9 +156,14 @@
                         </button>
                     </form>
                 @else
-                    <div class="alert alert-info">
-                        <i class="bi bi-info-circle"></i>
-                        <a href="{{ route('login') }}">Faça login</a> para comentar nesta receita.
+                    <div class="bg-info bg-opacity-10 border border-info rounded-3 p-3 d-flex align-items-center">
+                        <div class="text-info me-2" style="font-size: 1.5rem;">
+                            <i class="bi bi-info-circle-fill"></i>
+                        </div>
+                        <div>
+                            <a href="{{ route('login') }}" class="text-decoration-none fw-semibold">Faça login</a> 
+                            <span class="text-muted">para comentar nesta receita.</span>
+                        </div>
                     </div>
                 @endauth
 
@@ -165,12 +173,26 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-start mb-2">
-                                        <h6 class="mb-0">
-                                            <i class="bi bi-person-circle"></i> {{ $comment->user->name }}
-                                        </h6>
-                                        <small class="text-muted">
-                                            {{ $comment->created_at->diffForHumans() }}
-                                        </small>
+                                        <div>
+                                            <h6 class="mb-0">
+                                                <i class="bi bi-person-circle"></i> {{ $comment->user->name }}
+                                            </h6>
+                                            <small class="text-muted">
+                                                {{ $comment->created_at->diffForHumans() }}
+                                            </small>
+                                        </div>
+                                        @can('delete', $comment)
+                                            <x-confirm-delete 
+                                                action="{{ route('comments.destroy', $comment) }}"
+                                                title="Deletar comentário?"
+                                                text="Tem certeza que deseja remover este comentário?"
+                                                confirmText="Sim, deletar!"
+                                                cancelText="Cancelar"
+                                                class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash3"></i>
+                                                <span>Deletar</span>
+                                            </x-confirm-delete>
+                                        @endcan
                                     </div>
                                     <p class="mb-0">{{ $comment->body }}</p>
                                 </div>

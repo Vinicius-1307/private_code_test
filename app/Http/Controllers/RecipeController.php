@@ -46,14 +46,21 @@ class RecipeController extends Controller
      */
     public function store(StoreRecipeRequest $request): RedirectResponse
     {
-        $recipe = $this->recipeService->createRecipe(
-            $request->validated(),
-            $request->user()->id
-        );
+        try {
+            $recipe = $this->recipeService->createRecipe(
+                $request->validated(),
+                $request->user()->id
+            );
 
-        return redirect()
-            ->route('recipes.show', $recipe)
-            ->with('success', 'Receita criada com sucesso!');
+            return redirect()
+                ->route('recipes.show', $recipe)
+                ->with('success', 'Receita criada com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Erro ao criar receita. Por favor, tente novamente.');
+        }
     }
 
     /**
@@ -98,11 +105,18 @@ class RecipeController extends Controller
      */
     public function update(UpdateRecipeRequest $request, Recipe $recipe): RedirectResponse
     {
-        $this->recipeService->updateRecipe($recipe, $request->validated());
+        try {
+            $this->recipeService->updateRecipe($recipe, $request->validated());
 
-        return redirect()
-            ->route('recipes.show', $recipe)
-            ->with('success', 'Receita atualizada com sucesso!');
+            return redirect()
+                ->route('recipes.show', $recipe)
+                ->with('success', 'Receita atualizada com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Erro ao atualizar receita. Por favor, tente novamente.');
+        }
     }
 
     /**
@@ -115,10 +129,16 @@ class RecipeController extends Controller
     {
         $this->authorize('delete', $recipe);
 
-        $this->recipeService->deleteRecipe($recipe);
+        try {
+            $this->recipeService->deleteRecipe($recipe);
 
-        return redirect()
-            ->route('recipes.index')
-            ->with('success', 'Receita deletada com sucesso!');
+            return redirect()
+                ->route('recipes.index')
+                ->with('success', 'Receita deletada com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->with('error', 'Erro ao deletar receita. Por favor, tente novamente.');
+        }
     }
 }

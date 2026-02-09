@@ -22,14 +22,24 @@ class RatingController extends Controller
      */
     public function store(StoreRatingRequest $request, Recipe $recipe): RedirectResponse
     {
-        $this->ratingService->rateRecipe(
-            $recipe->id,
-            $request->user()->id,
-            $request->validated('score')
-        );
+        try {
+            $this->ratingService->rateRecipe(
+                $recipe->id,
+                $request->user()->id,
+                $request->validated('score')
+            );
 
-        return redirect()
-            ->route('recipes.show', $recipe)
-            ->with('success', 'Avaliação registrada com sucesso!');
+            return redirect()
+                ->route('recipes.show', $recipe)
+                ->with('success', 'Avaliação registrada com sucesso!');
+        } catch (\InvalidArgumentException $e) {
+            return redirect()
+                ->back()
+                ->with('error', $e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->with('error', 'Erro ao registrar avaliação. Por favor, tente novamente.');
+        }
     }
 }
