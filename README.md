@@ -232,16 +232,6 @@ Acesse: **http://localhost:8080**
 
 O projeto possui **cobertura completa de testes unitários** implementados com **Pest PHP**.
 
-### 📊 Cobertura de Testes
-
-```
-✅ 66 testes | 163 assertions
-✅ Services: 100% cobertura (31 testes)
-✅ Repositories: 100% cobertura (22 testes)  
-✅ Policies: 100% cobertura (11 testes)
-✅ Tempo de execução: ~0.54s
-```
-
 ### Executando os Testes
 
 **Todos os testes:**
