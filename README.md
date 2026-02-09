@@ -333,8 +333,6 @@ comments
 - **66 testes unitários** com Pest PHP
 - **100% cobertura** em Services, Repositories e Policies
 - **Mocks e stubs** para isolamento de testes
-- **TDD-ready** - Estrutura preparada para Test-Driven Development
-- Documentação completa de testes em [TESTING.md](TESTING.md)
 
 ---
 
