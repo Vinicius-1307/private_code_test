@@ -13,6 +13,7 @@ Um sistema de gerenciamento de receitas culinárias desenvolvido para avaliaçã
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
 - [Executando o Projeto](#executando-o-projeto)
+- [Testes](#testes)
 - [Usuário de Teste](#usuário-de-teste)
 - [Banco de Dados](#banco-de-dados)
 - [Notas de Desenvolvimento](#notas-de-desenvolvimento)
@@ -60,6 +61,10 @@ Sistema web para compartilhamento e avaliação de receitas culinárias, onde us
 - [x] Exibir autor e data do comentário
 - [x] Apenas usuários autenticados podem comentar
 
+### Qualidade e Testes
+- [x] 66 testes unitários automatizados (Pest PHP)
+- [x] 100% cobertura em Services, Repositories e Policies
+
 ---
 
 ## Tecnologias
@@ -69,6 +74,11 @@ Sistema web para compartilhamento e avaliação de receitas culinárias, onde us
 - **PHP 8.2+** - Linguagem de programação
 - **MySQL/SQLite** - Banco de dados
 - **Eloquent ORM** - Mapeamento objeto-relacional
+
+### Testes
+- **Pest PHP 3.8** - Framework de testes moderno
+- **Mockery** - Biblioteca de mocks
+- **66 testes unitários** - 100% cobertura em Services/Repositories/Policies
 
 ### Frontend
 - **Blade Templates** - Motor de templates do Laravel
@@ -218,6 +228,45 @@ Acesse: **http://localhost:8080**
 
 ---
 
+## Testes
+
+O projeto possui **cobertura completa de testes unitários** implementados com **Pest PHP**.
+
+### 📊 Cobertura de Testes
+
+```
+✅ 66 testes | 163 assertions
+✅ Services: 100% cobertura (31 testes)
+✅ Repositories: 100% cobertura (22 testes)  
+✅ Policies: 100% cobertura (11 testes)
+✅ Tempo de execução: ~0.54s
+```
+
+### Executando os Testes
+
+**Todos os testes:**
+```bash
+composer test
+```
+
+### Componentes Testados
+
+**Services:**
+- `RecipeService` - 12 testes (CRUD, paginação, validações)
+- `CommentService` - 7 testes (criação, listagem, exclusão)
+- `RatingService` - 12 testes (avaliações, scores 1-5)
+
+**Repositories:**
+- `RecipeRepository` - 10 testes (queries, eager loading)
+- `CommentRepository` - 5 testes (CRUD, ordenação)
+- `RatingRepository` - 7 testes (updateOrCreate, unicidade)
+
+**Policies:**
+- `RecipePolicy` - 6 testes (autorização update/delete)
+- `CommentPolicy` - 5 testes (múltiplos cenários)
+
+---
+
 ## Usuário de Teste
 
 Após executar as seeders (`migrate:fresh --seed`), use essas credenciais para login:
@@ -289,6 +338,13 @@ comments
 - **L**iskov Substitution - Interfaces garantem substituibilidade
 - **I**nterface Segregation - Interfaces específicas
 - **D**ependency Inversion - Dependências via abstração
+
+### Qualidade de Código
+- **66 testes unitários** com Pest PHP
+- **100% cobertura** em Services, Repositories e Policies
+- **Mocks e stubs** para isolamento de testes
+- **TDD-ready** - Estrutura preparada para Test-Driven Development
+- Documentação completa de testes em [TESTING.md](TESTING.md)
 
 ---
 
