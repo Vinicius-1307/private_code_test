@@ -149,7 +149,7 @@ Certifique-se de ter instalado:
 ### 1. Clone o Repositório
 ```bash
 git clone https://github.com/Vinicius-1307/private_code_test.git
-cd private_code
+cd private_code_test
 ```
 
 ### 2. Instale as Dependências PHP
